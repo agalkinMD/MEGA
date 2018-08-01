@@ -1,0 +1,24 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Мобильные клиенты" verbose="1" parallel="tests" thread-count="1">
+    <test name="Nexus 5-Office">
+        <parameter name="deviceName" value="Nexus 5"/>
+        <parameter name="platform" value="Android 6.0.1"/>
+        <parameter name="udid" value="0391d3a4437f32ab"/>
+        <parameter name="mobilePort" value="8200"/>
+        <parameter name="serverPort" value="4728"/>
+
+        <groups>
+            <define name="all">
+                <include name="check-in"/>
+                <include name="functional"/>
+            </define>
+            <run>
+                <include name="check-in"/>
+            </run>
+        </groups>
+
+        <packages>
+            <package name="ru.mobiledimension.megaapp.tests.mallselection"/>
+        </packages>
+    </test>
+</suite>
