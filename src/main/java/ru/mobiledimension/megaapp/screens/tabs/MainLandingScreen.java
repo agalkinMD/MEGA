@@ -16,7 +16,7 @@ public class MainLandingScreen extends BaseScreen {
     }
 
     @iOSFindBy(accessibility = "Белая Дача")
-    @AndroidFindBy(id = "ru.mobiledimension.mega:id/title_tv")
+    @AndroidFindBy(id = "ru.mobiledimension.mega:id/title_tvv")
     MobileElement mallChange;
 
     @Step("Перехожу на экран выбора МЕГИ...")
