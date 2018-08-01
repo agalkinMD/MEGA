@@ -16,7 +16,7 @@
                 <include name="check-in"/>
             </run>
         </groups>
-        
+
         <packages>
             <package name="ru.mobiledimension.megaapp.tests.mallselection"/>
             <package name="ru.mobiledimension.megaapp.tests.profile"/>
