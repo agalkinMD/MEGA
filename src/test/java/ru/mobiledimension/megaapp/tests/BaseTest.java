@@ -85,7 +85,12 @@ public abstract class BaseTest {
     }
 
     @AfterSuite
-    protected void deleteAllureHistoryTrend() throws IOException {
+    protected void prepareAllureReport() throws IOException {
+        deleteAllureHistoryTrend();
+        copyAllureEnvironmentFile();
+    }
+
+    private void deleteAllureHistoryTrend() throws IOException {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
         File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
         File trendResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history-trend.json");
@@ -95,4 +100,11 @@ public abstract class BaseTest {
         trendResults.delete();
         historyResults.delete();
     }
+
+    private void copyAllureEnvironmentFile() throws IOException {
+        File source = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/src/test/resources/environment.properties");
+        File destination = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/environment.properties");
+        Files.copy(source.toPath(), destination.toPath());
+    }
+
 }

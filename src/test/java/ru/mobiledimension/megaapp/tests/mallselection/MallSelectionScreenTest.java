@@ -41,6 +41,6 @@ public class MallSelectionScreenTest extends BaseTest {
     @AfterClass(description = "Возврат назад на главный экран", alwaysRun = true)
     public void goToStartScreen() throws IOException {
         mallSelectionScreen.clickBelayaDachaButton();
-        deleteAllureHistoryTrend();
+        prepareAllureReport();
     }
 }
