@@ -68,7 +68,7 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <systemPropertyVariables>
-                        <allure.results.directory>target/allure-results</allure.results.directory>
+                        <allure.results.directory>/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results</allure.results.directory>
                         <surefire.rerunFailingTestsCount>2</surefire.rerunFailingTestsCount>
                     </systemPropertyVariables>
                 </configuration>
