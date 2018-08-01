@@ -1,5 +1,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Мобильные клиенты" verbose="1" parallel="tests" thread-count="1">
+<suite name="Мобильные клиенты" verbose="1" parallel="tests" thread-count="2">
+    <test name="Test Android (Nexus 5-Office)">
+        <parameter name="deviceName" value="Nexus 5"/>
+        <parameter name="platform" value="Android 6.0.1"/>
+        <parameter name="udid" value="0391d3a4437f32ab"/>
+        <parameter name="mobilePort" value="8200"/>
+        <parameter name="serverPort" value="4726"/>
+
+        <packages>
+            <package name="ru.mobiledimension.megaapp.tests.mallselection"/>
+            <package name="ru.mobiledimension.megaapp.tests.profile"/>
+        </packages>
+    </test>
+
     <test name="iPhone 6-Anton">
         <parameter name="deviceName" value="iPhone 6"/>
         <parameter name="platform" value="iOS 11.2.5"/>
@@ -19,6 +32,7 @@
 
         <packages>
             <package name="ru.mobiledimension.megaapp.tests.mallselection"/>
+            <package name="ru.mobiledimension.megaapp.tests.profile"/>
         </packages>
     </test>
 </suite>
