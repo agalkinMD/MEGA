@@ -7,6 +7,16 @@
         <parameter name="mobilePort" value="8200"/>
         <parameter name="serverPort" value="4726"/>
 
+        <groups>
+            <define name="all">
+                <include name="check-in"/>
+                <include name="functional"/>
+            </define>
+            <run>
+                <include name="check-in"/>
+            </run>
+        </groups>
+        
         <packages>
             <package name="ru.mobiledimension.megaapp.tests.mallselection"/>
             <package name="ru.mobiledimension.megaapp.tests.profile"/>
