@@ -84,10 +84,9 @@ public abstract class BaseTest {
         return driver;
     }
 
-    /*@AfterSuite
-    protected void copyAllureEnvironment() throws IOException  {
-        File source = new File("src/test/resources/environment.properties");
-        File destination = new File("target/allure-results/environment.properties");
-        Files.copy(source.toPath(), destination.toPath());
-    }*/
+    @AfterSuite
+    protected void deleteAllureHistoryTrend() throws IOException  {
+        File trend = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
+        trend.delete();
+    }
 }

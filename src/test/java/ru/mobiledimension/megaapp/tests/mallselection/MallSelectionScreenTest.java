@@ -7,6 +7,8 @@ import ru.mobiledimension.megaapp.screens.tabs.MainLandingScreen;
 import ru.mobiledimension.megaapp.screens.mallselection.MallSelectionScreen;
 import ru.mobiledimension.megaapp.tests.BaseTest;
 
+import java.io.IOException;
+
 @Epic("Базовый функционал")
 @Feature("Процесс смены МЕГИ")
 public class MallSelectionScreenTest extends BaseTest {
@@ -37,8 +39,8 @@ public class MallSelectionScreenTest extends BaseTest {
     }
 
     @AfterClass(description = "Возврат назад на главный экран", alwaysRun = true)
-    public void goToStartScreen() {
+    public void goToStartScreen() throws IOException {
         mallSelectionScreen.clickBelayaDachaButton();
+        deleteAllureHistoryTrend();
     }
-
 }

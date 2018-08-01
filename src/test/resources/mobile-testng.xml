@@ -19,7 +19,6 @@
 
         <packages>
             <package name="ru.mobiledimension.megaapp.tests.mallselection"/>
-            <package name="ru.mobiledimension.megaapp.tests.profile"/>
         </packages>
     </test>
 
@@ -42,7 +41,6 @@
 
         <packages>
             <package name="ru.mobiledimension.megaapp.tests.mallselection"/>
-            <package name="ru.mobiledimension.megaapp.tests.profile"/>
         </packages>
     </test>
 </suite>
