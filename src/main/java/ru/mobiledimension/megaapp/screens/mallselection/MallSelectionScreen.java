@@ -15,7 +15,7 @@ public class MallSelectionScreen extends BaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    @iOSFindBy(accessibility = "Выбери свою МЕГУ")
+    @iOSFindBy(accessibility = "Выбери свою МЕГУУ")
     @AndroidFindBy(id = "ru.mobiledimension.mega:id/choose_mall_hint")
     MobileElement chooseMallLabel;
 
