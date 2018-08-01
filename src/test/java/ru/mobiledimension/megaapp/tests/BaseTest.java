@@ -87,8 +87,12 @@ public abstract class BaseTest {
     @AfterSuite
     protected void deleteAllureHistoryTrend() throws IOException {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
+        File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
         File trendResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history-trend.json");
+        File historyResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history.json");
         trendReport.delete();
+        historyReport.delete();
         trendResults.delete();
+        historyResults.delete();
     }
 }
