@@ -13,15 +13,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
     AppiumDriver driver;
     AppiumDriverLocalService service;
 
-    AppiumDriver setUp(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
+    private AppiumDriver setUp(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
         service = new AppiumServiceBuilder().usingPort(Integer.valueOf(serverPort)).build();
         service.start();
 
@@ -84,13 +82,7 @@ public abstract class BaseTest {
         return driver;
     }
 
-    @AfterSuite
-    protected void prepareAllureReport() throws IOException {
-        deleteAllureHistoryTrend();
-        //copyAllureEnvironmentFile();
-    }
-
-    private void deleteAllureHistoryTrend() throws IOException {
+    private void deleteAllureHistory() {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
         File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
         File trendResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history-trend.json");
@@ -101,9 +93,8 @@ public abstract class BaseTest {
         historyResults.delete();
     }
 
-    /*private void copyAllureEnvironmentFile() throws IOException {
-        File source = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/src/test/resources/environment.properties");
-        File destination = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/environment.properties");
-        Files.copy(source.toPath(), destination.toPath());
-    }*/
+    @AfterSuite(alwaysRun = true)
+    private void prepareAllureReport() {
+        deleteAllureHistory();
+    }
 }

@@ -7,8 +7,6 @@ import ru.mobiledimension.megaapp.screens.tabs.MainLandingScreen;
 import ru.mobiledimension.megaapp.screens.mallselection.MallSelectionScreen;
 import ru.mobiledimension.megaapp.tests.BaseTest;
 
-import java.io.IOException;
-
 @Epic("Базовый функционал")
 @Feature("Процесс смены МЕГИ")
 public class MallSelectionScreenTest extends BaseTest {
@@ -38,9 +36,8 @@ public class MallSelectionScreenTest extends BaseTest {
         Assert.assertTrue(mallSelectionScreen.isChooseMallLabelPresent());
     }
 
-    @AfterClass(description = "Возврат назад на главный экран", alwaysRun = true)
-    public void goToStartScreen() throws IOException {
+    @AfterClass(description = "Возврат на главный экран", alwaysRun = true)
+    public void goToStartScreen() {
         mallSelectionScreen.clickBelayaDachaButton();
-        prepareAllureReport();
     }
 }

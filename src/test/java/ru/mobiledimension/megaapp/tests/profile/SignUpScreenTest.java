@@ -59,7 +59,7 @@ public class SignUpScreenTest extends BaseTest {
         signInScreen.clickSignUpButton();
     }
 
-    @AfterClass(description = "Возврат назад на главный экран", alwaysRun = true)
+    @AfterClass(description = "Возврат на главный экран", alwaysRun = true)
     public void goToStartScreen() {
         bottomTab.clickProfileLandingScreen();
         bottomTab.clickMainLandingScreen();
