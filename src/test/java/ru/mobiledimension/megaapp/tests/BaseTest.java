@@ -50,7 +50,7 @@ public abstract class BaseTest {
 
                 driver = new IOSDriver(service.getUrl(), capabilities);
 
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
                 return driver;
 
@@ -66,7 +66,7 @@ public abstract class BaseTest {
 
                 driver = new AndroidDriver(service.getUrl(), capabilities);
 
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
                 return driver;
 

@@ -24,6 +24,10 @@ public class BottomTab extends BaseScreen {
     @AndroidFindBy(id = "ru.mobiledimension.mega:id/tab_profile")
     MobileElement profile;
 
+    @iOSFindBy(accessibility = "Меню")
+    @AndroidFindBy(id = "ru.mobiledimension.mega:id/tab_menu")
+    MobileElement menu;
+
     @Step("Перехожу в таб \"Главная\"...")
     public void clickMainLandingScreen() {
         click(home);
@@ -32,5 +36,10 @@ public class BottomTab extends BaseScreen {
     @Step("Перехожу в таб \"Профиль\"...")
     public void clickProfileLandingScreen() {
         click(profile);
+    }
+
+    @Step("Перехожу в таб \"Меню\"...")
+    public void clickMenuLandingScreen() {
+        click(menu);
     }
 }
