@@ -37,7 +37,7 @@ public class SignUpScreen extends BaseScreen {
     @AndroidFindBy(id = "ru.mobiledimension.mega:id/registerButton")
     MobileElement signUpButton;
 
-    @iOSFindBy(accessibility = "Войти")
+    @iOSFindBy(accessibility = "back")
     @AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.RelativeLayout/android.view.ViewGroup/android.widget.ImageButton")
     MobileElement backButton;
 
