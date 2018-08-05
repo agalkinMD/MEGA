@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
+import org.testng.internal.InvokedMethod;
 import ru.mobiledimension.megaapp.screens.profile.SignInScreen;
 import ru.mobiledimension.megaapp.screens.tabs.BottomTab;
 import ru.mobiledimension.megaapp.screens.tabs.ProfileLandingScreen;
@@ -16,7 +17,7 @@ import ru.mobiledimension.megaapp.screens.tabs.ProfileLandingScreen;
 import java.io.File;
 import java.io.IOException;
 
-public class AllureAttachmentListener extends BaseTest implements ITestListener, ISuiteListener {
+public class AllureAttachmentListener extends BaseTest implements ITestListener, ISuiteListener, IInvokedMethodListener {
 
     public void onStart(ISuite suite) {
         System.out.println("After executing Suite:" + suite.getName());
@@ -24,6 +25,14 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
 
     public void onStart(ITestContext context) {
         System.out.println("Begin executing Test:" + context.getName());
+    }
+
+    public void beforeInvocation(IInvokedMethod arg0, ITestResult arg1) {
+
+    }
+
+    public void afterInvocation(IInvokedMethod arg0, ITestResult arg1) {
+        //saveScreenshotPNG(getDriver());
     }
 
     public void onFinish(ITestContext context) {
@@ -43,10 +52,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
     }
 
     public void onTestFailure(ITestResult result) {
-        System.out.println("Test Status::" + result.getName());
-        System.out.println("Screenshot has been captured for test-case: ");
-
-        saveScreenshotPNG(getDriver());
+        saveAttachement(saveScreenshotPNG(driver));
     }
 
     public void onTestSkipped(ITestResult result) {
@@ -57,22 +63,23 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
 
     }
 
-    @Attachment(type = "image/png")
+    @Attachment(value = "{0}", type = "image/png")
     public byte[] saveScreenshotPNG(AppiumDriver driver) {
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
 
     }
 
     public void saveAttachement(byte[] byteRepresentation) {
-        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/TemporaryAttachmentFolder");
-
-        if (driver.getPlatformName().equals("android"))
-            file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/TemporaryAttachmentFolder/android"));
-        else file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/TemporaryAttachmentFolder/ios"));
-
+        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/"
+                + driver.getPlatformName());
         try {
             FileUtils.writeByteArrayToFile(file, byteRepresentation);
         }
         catch (IOException e) { }
+
+        if (driver.getPlatformName().equals("ios"))
+            file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/iOS.png"));
+        else
+            file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/Android.png"));
     }
 }

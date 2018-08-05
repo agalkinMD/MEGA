@@ -19,14 +19,15 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterSuite;
+import ru.mobiledimension.megaapp.screens.profile.SignInScreen;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
     static AppiumDriver driver;
-    static AppiumDriver iOSDriver;
-    static AppiumDriver androidDriver;
+    //static AppiumDriver iOSDriver;
+    //static AppiumDriver androidDriver;
 
     AppiumDriverLocalService service;
 
@@ -56,16 +57,16 @@ public abstract class BaseTest {
                 capabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, false);
                 capabilities.setCapability(IOSMobileCapabilityType.BUNDLE_ID, "ru.mobiledimension.Mega");
 
-                if (iOSDriver != null)
-                    return iOSDriver;
+                if (driver != null)
+                    return driver;
 
-                iOSDriver = new IOSDriver(service.getUrl(), capabilities);
+                driver = new IOSDriver(service.getUrl(), capabilities);
 
-                iOSDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
-                driver = iOSDriver;
+                //iOSDriver = driver;
 
-                return iOSDriver;
+                return driver;
 
             case "android":
                 //capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
@@ -74,14 +75,16 @@ public abstract class BaseTest {
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "ru.mobiledimension.mega.ui.splash.SplashActivity");
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ru.mobiledimension.mega.ui.navigation.v2.NavigationActivity");
 
-                if (androidDriver != null)
-                    return androidDriver;
+                if (driver != null)
+                    return driver;
 
-                androidDriver = new AndroidDriver(service.getUrl(), capabilities);
+                driver = new AndroidDriver(service.getUrl(), capabilities);
 
-                androidDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
-                return androidDriver;
+                //androidDriver = driver;
+
+                return driver;
 
             default:
                 return driver = null;
@@ -91,16 +94,17 @@ public abstract class BaseTest {
     protected AppiumDriver setDriver(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
         if (driver == null)
             return setUp(deviceName, platform, udid, mobilePort, serverPort);
-        else if (driver.getPlatformName().equals("ios"))
+        return driver;
+        /*else if (driver.getPlatformName().equals("ios"))
             return iOSDriver;
-        else return androidDriver;
+        else return androidDriver;*/
     }
 
-    protected AppiumDriver getDriver() {
-        if (driver.getPlatformName().equals("ios"))
+    /*protected AppiumDriver getDriver() {
+        if (iOSDriver.getPlatformName().equals("ios"))
             return iOSDriver;
         else return androidDriver;
-    }
+    }*/
 
     private void deleteAllureHistory() {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");

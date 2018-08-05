@@ -18,8 +18,10 @@ public class SignInScreenTest extends BaseTest {
     ProfileLandingScreen profileLandingScreen;
     SignInScreen signInScreen;
 
+    @BeforeClass(description = "Создание объектов экранов",
+            alwaysRun = true)
     @Parameters({"deviceName", "platform", "udid", "mobilePort", "serverPort"})
-    public SignInScreenTest(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
+    public void createPageObjects(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
         bottomTab = new BottomTab(setDriver(deviceName, platform, udid, mobilePort, serverPort));
         profileLandingScreen = new ProfileLandingScreen(setDriver(deviceName, platform, udid, mobilePort, serverPort));
         signInScreen = new SignInScreen(setDriver(deviceName, platform, udid, mobilePort, serverPort));
