@@ -51,7 +51,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
 
     }
 
-    @Attachment(value = "{0}", type = "image/png")
+    @Attachment(type = "image/png")
     public byte[] saveScreenshotPNG(AppiumDriver driver) {
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
 
