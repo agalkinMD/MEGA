@@ -23,7 +23,7 @@ import org.testng.annotations.AfterSuite;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-public abstract class BaseTest {
+public class BaseTest {
     static AppiumDriver driver;
 
     //static AppiumDriver iOSDriver;
@@ -60,7 +60,7 @@ public abstract class BaseTest {
                 if (driver != null)
                     return driver;
 
-                driver = new IOSDriver(service.getUrl(), capabilities);
+                driver = new AppiumDriver(service.getUrl(), capabilities);
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
@@ -78,7 +78,7 @@ public abstract class BaseTest {
                 if (driver != null)
                     return driver;
 
-                driver = new AndroidDriver(service.getUrl(), capabilities);
+                driver = new AppiumDriver(service.getUrl(), capabilities);
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
@@ -98,6 +98,9 @@ public abstract class BaseTest {
         return driver;
     }
 
+    protected AppiumDriver getDriver2() {
+        return driver;
+    }
     private void deleteAllureHistory() {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
         File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
