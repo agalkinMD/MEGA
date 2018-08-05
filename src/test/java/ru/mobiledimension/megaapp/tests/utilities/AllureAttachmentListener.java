@@ -70,16 +70,15 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
     }
 
     public void saveAttachement(byte[] byteRepresentation) {
-        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/"
-                + driver.getPlatformName());
+        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments");
         try {
             FileUtils.writeByteArrayToFile(file, byteRepresentation);
         }
         catch (IOException e) { }
 
-        if (driver.getPlatformName().equals("ios"))
+        /*if (driver.getPlatformName().equals("ios"))
             file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/iOS.png"));
         else
-            file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/Android.png"));
+            file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/Android.png"));*/
     }
 }
