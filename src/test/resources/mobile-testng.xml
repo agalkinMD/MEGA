@@ -1,6 +1,28 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Мобильный клиент" verbose="1" parallel="tests" thread-count="2">
 
+    <test name="Test iOS (iPhone 6-Anton)">
+        <parameter name="deviceName" value="iPhone 6"/>
+        <parameter name="platform" value="iOS 11.2.5"/>
+        <parameter name="udid" value="000c3a4f52bd60314def98ff164b0a1fc7d1390a"/>
+        <parameter name="mobilePort" value="8101"/>
+        <parameter name="serverPort" value="4728"/>
+
+        <groups>
+            <define name="all">
+                <include name="check-in"/>
+                <include name="functional"/>
+            </define>
+            <run>
+                <include name="check-in"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="ru.mobiledimension.megaapp.tests.profile.SignInScreenTest"/>
+        </classes>
+    </test>
+
     <test name="Test Android (Xiaomi Redmi Note 3-Office)">
         <parameter name="deviceName" value="Xiaomi Redmi Note 3"/>
         <parameter name="platform" value="Android 6.0.1"/>
