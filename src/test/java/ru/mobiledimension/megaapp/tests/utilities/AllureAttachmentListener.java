@@ -38,7 +38,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
         System.out.println("Test Status::" + result.getName());
         System.out.println("Screenshot has been captured for test-case: ");
 
-        saveScreenshotPNG(driver);
+        saveScreenshotPNG(driver.getPlatformName(), driver);
     }
 
     public void onTestSkipped(ITestResult result) {
@@ -49,8 +49,8 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
 
     }
 
-    @Attachment(type = "image/png")
-    public byte[] saveScreenshotPNG(AppiumDriver driver) {
+    @Attachment(value = "{0}", type = "image/png")
+    public byte[] saveScreenshotPNG(String platforName, AppiumDriver driver) {
         //return ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
     }
