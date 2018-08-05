@@ -24,7 +24,11 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
-    AppiumDriver driver;
+    static AppiumDriver driver;
+
+    //static AppiumDriver iOSDriver;
+    //static AppiumDriver androidDriver;
+
     AppiumDriverLocalService service;
 
     private AppiumDriver setUp(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
@@ -60,6 +64,8 @@ public abstract class BaseTest {
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
+                //iOSDriver = driver;
+
                 return driver;
 
             case "android":
@@ -76,6 +82,8 @@ public abstract class BaseTest {
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
+                //androidDriver = driver;
+
                 return driver;
 
             default:
@@ -87,6 +95,10 @@ public abstract class BaseTest {
         if (driver == null)
             if (setUp(deviceName, platform, udid, mobilePort, serverPort) == null)
                 System.out.println("Can't instantiate a new driver instance due to invalid OS type!");
+        return driver;
+    }
+
+    protected AppiumDriver getDriver2() {
         return driver;
     }
 
