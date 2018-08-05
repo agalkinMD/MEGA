@@ -7,7 +7,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.Point;
 
 import java.time.Duration;
 
@@ -28,10 +27,6 @@ public abstract class BaseScreen {
         int coordinateX = driver.manage().window().getSize().width / 3;
         int initialCoordinateY = driver.manage().window().getSize().height * 4 / 5;
         int finalCoordinateY = driver.manage().window().getSize().height / 8 ;
-
-        //PointOption initialCoordinates = new PointOption().withCoordinates(coordinateX, initialCoordinateY);
-        PointOption finalCoordinates  = new PointOption().withCoordinates(coordinateX, finalCoordinateY);
-        WaitOptions wait = new WaitOptions();
 
         touchAction.press(new PointOption().withCoordinates(coordinateX, initialCoordinateY))
                 .waitAction(new WaitOptions().withDuration(Duration.ofSeconds(2)))

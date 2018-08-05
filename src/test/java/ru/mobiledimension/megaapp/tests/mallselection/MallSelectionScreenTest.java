@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.mobiledimension.megaapp.screens.tabs.MainLandingScreen;
 import ru.mobiledimension.megaapp.screens.mallselection.MallSelectionScreen;
-import ru.mobiledimension.megaapp.tests.BaseTest;
+import ru.mobiledimension.megaapp.tests.utilities.BaseTest;
 
 @Epic("Базовый функционал")
 @Feature("Процесс смены МЕГИ")

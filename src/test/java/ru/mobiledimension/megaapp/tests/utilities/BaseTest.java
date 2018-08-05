@@ -1,4 +1,4 @@
-package ru.mobiledimension.megaapp.tests;
+package ru.mobiledimension.megaapp.tests.utilities;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
@@ -9,7 +9,15 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Attachment;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.ITestContext;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterSuite;
 
 import java.io.File;
@@ -97,4 +105,37 @@ public abstract class BaseTest {
     private void prepareAllureReport() {
         deleteAllureHistory();
     }
+
+    /*public void onTestStart(ITestResult result) {
+
+    }
+
+    public void onTestSuccess(ITestResult result) {
+
+    }
+
+    public void onTestFailure(ITestResult result) {
+        saveScreenshot();
+    }
+
+    public void onTestSkipped(ITestResult result) {
+
+    }
+
+    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+
+    }
+
+    public void onStart(ITestContext context) {
+
+    }
+
+    public void onFinish(ITestContext context) {
+
+    }
+
+    @Attachment(value = "{0}", type = "image/png")
+    public byte[] saveScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }*/
 }

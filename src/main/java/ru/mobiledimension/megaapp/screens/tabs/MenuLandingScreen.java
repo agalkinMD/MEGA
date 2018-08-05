@@ -19,6 +19,14 @@ public class MenuLandingScreen extends BaseScreen {
     @iOSFindBy(accessibility = "О приложении")
     MobileElement aboutAppSection;
 
+    @iOSFindBy(id = "Шопинг налегке")
+    MobileElement hfsSection;
+
+    public void clickHfsSection() {
+        scroll();
+        click(hfsSection);
+    }
+
     public void clickAboutAppSection() {
         boolean isNotVisible = true;
 

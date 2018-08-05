@@ -7,7 +7,7 @@ import ru.mobiledimension.megaapp.screens.profile.SignInScreen;
 import ru.mobiledimension.megaapp.screens.profile.SignUpScreen;
 import ru.mobiledimension.megaapp.screens.tabs.BottomTab;
 import ru.mobiledimension.megaapp.screens.tabs.ProfileLandingScreen;
-import ru.mobiledimension.megaapp.tests.BaseTest;
+import ru.mobiledimension.megaapp.tests.utilities.BaseTest;
 
 @Epic("Личный кабинет пользователя")
 @Feature("Процесс регистрации пользователя")
