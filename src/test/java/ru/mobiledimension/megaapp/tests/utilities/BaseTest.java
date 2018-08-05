@@ -98,10 +98,6 @@ public abstract class BaseTest {
         return driver;
     }
 
-    protected AppiumDriver getDriver2() {
-        return driver;
-    }
-
     private void deleteAllureHistory() {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
         File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");

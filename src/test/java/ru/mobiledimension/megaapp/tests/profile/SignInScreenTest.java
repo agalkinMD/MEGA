@@ -9,7 +9,7 @@ import ru.mobiledimension.megaapp.screens.tabs.ProfileLandingScreen;
 import ru.mobiledimension.megaapp.tests.utilities.AllureAttachmentListener;
 import ru.mobiledimension.megaapp.tests.utilities.BaseTest;
 
-@Listeners(AllureAttachmentListener.class)
+//Listeners(AllureAttachmentListener.class)
 @Epic("Личный кабинет пользователя")
 @Feature("Процесс авторизации пользователя")
 public class SignInScreenTest extends BaseTest {
