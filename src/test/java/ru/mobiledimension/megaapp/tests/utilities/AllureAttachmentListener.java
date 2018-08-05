@@ -7,11 +7,17 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
+import ru.mobiledimension.megaapp.screens.profile.SignInScreen;
+import ru.mobiledimension.megaapp.screens.tabs.BottomTab;
+import ru.mobiledimension.megaapp.screens.tabs.ProfileLandingScreen;
 
 import java.io.File;
 import java.io.IOException;
 
 public class AllureAttachmentListener extends BaseTest implements ITestListener, ISuiteListener {
+
     public void onStart(ISuite suite) {
         System.out.println("After executing Suite:" + suite.getName());
     }
@@ -40,7 +46,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
         System.out.println("Test Status::" + result.getName());
         System.out.println("Screenshot has been captured for test-case: ");
 
-        saveScreenshotPNG(driver);
+        saveScreenshotPNG(getDriver());
     }
 
     public void onTestSkipped(ITestResult result) {

@@ -23,8 +23,10 @@ import org.testng.annotations.AfterSuite;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-public class BaseTest {
+public abstract class BaseTest {
     static AppiumDriver driver;
+    static AppiumDriver iOSDriver;
+    static AppiumDriver androidDriver;
 
     AppiumDriverLocalService service;
 
@@ -54,14 +56,16 @@ public class BaseTest {
                 capabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, false);
                 capabilities.setCapability(IOSMobileCapabilityType.BUNDLE_ID, "ru.mobiledimension.Mega");
 
-                if (driver != null)
-                    return driver;
+                if (iOSDriver != null)
+                    return iOSDriver;
 
-                driver = new IOSDriver(service.getUrl(), capabilities);
+                iOSDriver = new IOSDriver(service.getUrl(), capabilities);
 
-                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+                iOSDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
-                return driver;
+                driver = iOSDriver;
+
+                return iOSDriver;
 
             case "android":
                 //capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
@@ -70,25 +74,32 @@ public class BaseTest {
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "ru.mobiledimension.mega.ui.splash.SplashActivity");
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ru.mobiledimension.mega.ui.navigation.v2.NavigationActivity");
 
-                if (driver != null)
-                    return driver;
+                if (androidDriver != null)
+                    return androidDriver;
 
-                driver = new AndroidDriver(service.getUrl(), capabilities);
+                androidDriver = new AndroidDriver(service.getUrl(), capabilities);
 
-                driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+                androidDriver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
-                return driver;
+                return androidDriver;
 
             default:
                 return driver = null;
         }
     }
 
-    protected AppiumDriver getDriver(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
+    protected AppiumDriver setDriver(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
         if (driver == null)
-            if (setUp(deviceName, platform, udid, mobilePort, serverPort) == null)
-                System.out.println("Can't instantiate a new driver instance due to invalid OS type!");
-        return driver;
+            return setUp(deviceName, platform, udid, mobilePort, serverPort);
+        else if (driver.getPlatformName().equals("ios"))
+            return iOSDriver;
+        else return androidDriver;
+    }
+
+    protected AppiumDriver getDriver() {
+        if (driver.getPlatformName().equals("ios"))
+            return iOSDriver;
+        else return androidDriver;
     }
 
     private void deleteAllureHistory() {

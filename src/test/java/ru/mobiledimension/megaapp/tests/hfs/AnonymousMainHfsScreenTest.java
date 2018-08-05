@@ -23,9 +23,9 @@ public class AnonymousMainHfsScreenTest extends BaseTest {
             alwaysRun = true)
     @Parameters({"deviceName", "platform", "udid", "mobilePort", "serverPort"})
     public void createPageObjects(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
-        bottomTab = new BottomTab(getDriver(deviceName, platform, udid, mobilePort, serverPort));
-        menuLandingScreen = new MenuLandingScreen(getDriver(deviceName, platform, udid, mobilePort, serverPort));
-        anonymousMainHfsScreen = new AnonymousMainHfsScreen(getDriver(deviceName, platform, udid, mobilePort, serverPort));
+        bottomTab = new BottomTab(setDriver(deviceName, platform, udid, mobilePort, serverPort));
+        menuLandingScreen = new MenuLandingScreen(setDriver(deviceName, platform, udid, mobilePort, serverPort));
+        anonymousMainHfsScreen = new AnonymousMainHfsScreen(setDriver(deviceName, platform, udid, mobilePort, serverPort));
     }
 
     @BeforeClass(description = "Переход на целевой экран",

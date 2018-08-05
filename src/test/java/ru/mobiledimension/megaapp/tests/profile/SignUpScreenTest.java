@@ -21,10 +21,10 @@ public class SignUpScreenTest extends BaseTest {
             alwaysRun = true)
     @Parameters({"deviceName", "platform", "udid", "mobilePort", "serverPort"})
     public void createPageObjects(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
-        bottomTab = new BottomTab(getDriver(deviceName, platform, udid, mobilePort, serverPort));
-        profileLandingScreen = new ProfileLandingScreen(getDriver(deviceName, platform, udid, mobilePort, serverPort));
-        signInScreen = new SignInScreen(getDriver(deviceName, platform, udid, mobilePort, serverPort));
-        signUpScreen = new SignUpScreen(getDriver(deviceName, platform, udid, mobilePort, serverPort));
+        bottomTab = new BottomTab(setDriver(deviceName, platform, udid, mobilePort, serverPort));
+        profileLandingScreen = new ProfileLandingScreen(setDriver(deviceName, platform, udid, mobilePort, serverPort));
+        signInScreen = new SignInScreen(setDriver(deviceName, platform, udid, mobilePort, serverPort));
+        signUpScreen = new SignUpScreen(setDriver(deviceName, platform, udid, mobilePort, serverPort));
     }
 
     @BeforeClass(description = "Переход на целевой экран",

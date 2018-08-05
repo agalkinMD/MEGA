@@ -18,8 +18,8 @@ public class MallSelectionScreenTest extends BaseTest {
             alwaysRun = true)
     @Parameters({"deviceName", "platform", "udid", "mobilePort", "serverPort"})
     public void createPageObjects(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
-        mainLandingScreen = new MainLandingScreen(getDriver(deviceName, platform, udid, mobilePort, serverPort));
-        mallSelectionScreen = new MallSelectionScreen(getDriver(deviceName, platform, udid, mobilePort, serverPort));
+        mainLandingScreen = new MainLandingScreen(setDriver(deviceName, platform, udid, mobilePort, serverPort));
+        mallSelectionScreen = new MallSelectionScreen(setDriver(deviceName, platform, udid, mobilePort, serverPort));
     }
 
     @BeforeClass(description = "Переход на целевой экран",
