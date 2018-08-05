@@ -24,10 +24,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    static AppiumDriver driver;
-
-    //static AppiumDriver iOSDriver;
-    //static AppiumDriver androidDriver;
+    AppiumDriver driver;
 
     AppiumDriverLocalService service;
 
@@ -60,11 +57,9 @@ public class BaseTest {
                 if (driver != null)
                     return driver;
 
-                driver = new AppiumDriver(service.getUrl(), capabilities);
+                driver = new IOSDriver(service.getUrl(), capabilities);
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-                //iOSDriver = driver;
 
                 return driver;
 
@@ -78,11 +73,9 @@ public class BaseTest {
                 if (driver != null)
                     return driver;
 
-                driver = new AppiumDriver(service.getUrl(), capabilities);
+                driver = new AndroidDriver(service.getUrl(), capabilities);
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-                //androidDriver = driver;
 
                 return driver;
 
@@ -98,9 +91,6 @@ public class BaseTest {
         return driver;
     }
 
-    protected AppiumDriver getDriver2() {
-        return driver;
-    }
     private void deleteAllureHistory() {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
         File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
@@ -116,37 +106,4 @@ public class BaseTest {
     private void prepareAllureReport() {
         deleteAllureHistory();
     }
-
-    /*public void onTestStart(ITestResult result) {
-
-    }
-
-    public void onTestSuccess(ITestResult result) {
-
-    }
-
-    public void onTestFailure(ITestResult result) {
-        saveScreenshot();
-    }
-
-    public void onTestSkipped(ITestResult result) {
-
-    }
-
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-
-    }
-
-    public void onStart(ITestContext context) {
-
-    }
-
-    public void onFinish(ITestContext context) {
-
-    }
-
-    @Attachment(value = "{0}", type = "image/png")
-    public byte[] saveScreenshot() {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-    }*/
 }

@@ -40,7 +40,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
         System.out.println("Test Status::" + result.getName());
         System.out.println("Screenshot has been captured for test-case: ");
 
-        saveScreenshotPNG(getDriver2());
+        saveScreenshotPNG(driver);
     }
 
     public void onTestSkipped(ITestResult result) {
