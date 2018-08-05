@@ -24,7 +24,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    AppiumDriver driver;
+    static AppiumDriver driver;
 
     AppiumDriverLocalService service;
 
