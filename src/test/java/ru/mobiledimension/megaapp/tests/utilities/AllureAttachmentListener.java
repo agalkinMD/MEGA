@@ -32,7 +32,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
     }
 
     public void afterInvocation(IInvokedMethod arg0, ITestResult arg1) {
-        //saveScreenshotPNG(getDriver());
+        saveScreenshotPNG(driver);
     }
 
     public void onFinish(ITestContext context) {
@@ -52,7 +52,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
     }
 
     public void onTestFailure(ITestResult result) {
-        saveAttachement(saveScreenshotPNG(driver));
+        //saveAttachement(saveScreenshotPNG(driver));
     }
 
     public void onTestSkipped(ITestResult result) {
