@@ -1,23 +1,14 @@
 package ru.mobiledimension.megaapp.tests.utilities;
 
-import com.sun.tools.javac.code.Attribute;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.testng.*;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.internal.InvokedMethod;
-import ru.mobiledimension.megaapp.screens.profile.SignInScreen;
-import ru.mobiledimension.megaapp.screens.tabs.BottomTab;
-import ru.mobiledimension.megaapp.screens.tabs.ProfileLandingScreen;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 public class AllureAttachmentListener extends BaseTest implements ITestListener, ISuiteListener, IInvokedMethodListener {
 
