@@ -26,6 +26,15 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
     }
 
     public void afterInvocation(IInvokedMethod arg0, ITestResult arg1) {
+        if (arg0.getTestResult().getStatus() == 2) {
+            Object currentClass = arg1.getInstance();
+
+            AppiumDriver driver = ((BaseTest) currentClass).getDriver();
+
+            if (driver != null) {
+                saveAttachement(makeScreenshot(driver), driver.getPlatformName());
+            }
+        }
     }
 
     public void onFinish(ITestContext context) {
@@ -34,6 +43,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
 
     public void onFinish(ISuite suite) {
         System.out.println("After executing Suite:" + suite.getName());
+
     }
 
     public void onTestStart(ITestResult result) {
@@ -45,13 +55,13 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
     }
 
     public void onTestFailure(ITestResult result) {
-        Object currentClass = result.getInstance();
+        /*Object currentClass = result.getInstance();
 
         AppiumDriver driver = ((BaseTest) currentClass).getDriver();
 
         if (driver != null) {
             saveAttachement(makeScreenshot(driver), driver.getPlatformName());
-        }
+        }*/
         /*Class clazz = result.getTestClass().getRealClass();
         Field field = null;
 
