@@ -9,6 +9,7 @@ import org.testng.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class AllureAttachmentListener extends BaseTest implements ITestListener, ISuiteListener, IInvokedMethodListener {
 
@@ -49,7 +50,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
         AppiumDriver driver = ((BaseTest) currentClass).getDriver();
 
         if (driver != null) {
-            saveAttachement(makeScreenshot(driver));
+            saveAttachement(makeScreenshot(driver), driver.getPlatformName());
         }
         /*Class clazz = result.getTestClass().getRealClass();
         Field field = null;
@@ -83,8 +84,9 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
 
     }
 
-    public void saveAttachement(byte[] byteRepresentation) {
-        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/ololo.png");
+    public void saveAttachement(byte[] byteRepresentation, String platformName) {
+        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/" + platformName
+                + "_" + new Timestamp(System.currentTimeMillis()) + ".png");
         try {
             FileUtils.writeByteArrayToFile(file, byteRepresentation);
         }
