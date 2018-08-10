@@ -32,6 +32,8 @@ public abstract class BaseTest {
     AppiumDriverLocalService service;
 
     private AppiumDriver setUp(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
+        if (driver != null)
+            return driver;
 
         service = new AppiumServiceBuilder().usingPort(Integer.valueOf(serverPort)).build();
         service.start();
@@ -58,9 +60,6 @@ public abstract class BaseTest {
                 capabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, false);
                 capabilities.setCapability(IOSMobileCapabilityType.BUNDLE_ID, "ru.mobiledimension.Mega");
 
-                if (driver != null)
-                    return driver;
-
                 driver = new IOSDriver(service.getUrl(), capabilities);
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -73,9 +72,6 @@ public abstract class BaseTest {
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "ru.mobiledimension.mega");
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "ru.mobiledimension.mega.ui.splash.SplashActivity");
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ru.mobiledimension.mega.ui.navigation.v2.NavigationActivity");
-
-                if (driver != null)
-                    return driver;
 
                 driver = new AndroidDriver(service.getUrl(), capabilities);
 
