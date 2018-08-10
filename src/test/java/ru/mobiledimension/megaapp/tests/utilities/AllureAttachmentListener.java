@@ -88,7 +88,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
         //File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/" + platformName
         //        + "_" + new Timestamp(System.currentTimeMillis()) + ".png");
 
-        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/");
+        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/ololo.png");
 
         try {
             FileUtils.writeByteArrayToFile(file, byteRepresentation);
