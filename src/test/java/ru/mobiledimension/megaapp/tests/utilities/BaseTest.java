@@ -25,13 +25,17 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
-    static AppiumDriver driver;
+    AppiumDriver driver;
     //static AppiumDriver iOSDriver;
     //static AppiumDriver androidDriver;
 
     AppiumDriverLocalService service;
 
     private AppiumDriver setUp(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
+
+        if (driver != null)
+            return driver;
+
         service = new AppiumServiceBuilder().usingPort(Integer.valueOf(serverPort)).build();
         service.start();
 
@@ -57,14 +61,9 @@ public abstract class BaseTest {
                 capabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, false);
                 capabilities.setCapability(IOSMobileCapabilityType.BUNDLE_ID, "ru.mobiledimension.Mega");
 
-                if (driver != null)
-                    return driver;
-
                 driver = new IOSDriver(service.getUrl(), capabilities);
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-                //iOSDriver = driver;
 
                 return driver;
 
@@ -75,14 +74,9 @@ public abstract class BaseTest {
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "ru.mobiledimension.mega.ui.splash.SplashActivity");
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ru.mobiledimension.mega.ui.navigation.v2.NavigationActivity");
 
-                if (driver != null)
-                    return driver;
-
                 driver = new AndroidDriver(service.getUrl(), capabilities);
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-
-                //androidDriver = driver;
 
                 return driver;
 
@@ -91,6 +85,9 @@ public abstract class BaseTest {
         }
     }
 
+    protected AppiumDriver getDriver() {
+        return driver;
+    }
     protected AppiumDriver setDriver(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
         if (driver == null)
             return setUp(deviceName, platform, udid, mobilePort, serverPort);
@@ -99,12 +96,6 @@ public abstract class BaseTest {
             return iOSDriver;
         else return androidDriver;*/
     }
-
-    /*protected AppiumDriver getDriver() {
-        if (iOSDriver.getPlatformName().equals("ios"))
-            return iOSDriver;
-        else return androidDriver;
-    }*/
 
     private void deleteAllureHistory() {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");

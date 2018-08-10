@@ -1,5 +1,6 @@
 package ru.mobiledimension.megaapp.tests.profile;
 
+import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.*;
 import org.testng.Assert;
 import org.testng.annotations.*;

@@ -1,5 +1,6 @@
 package ru.mobiledimension.megaapp.tests.utilities;
 
+import com.sun.tools.javac.code.Attribute;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
@@ -16,6 +17,7 @@ import ru.mobiledimension.megaapp.screens.tabs.ProfileLandingScreen;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 public class AllureAttachmentListener extends BaseTest implements ITestListener, ISuiteListener, IInvokedMethodListener {
 
@@ -32,7 +34,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
     }
 
     public void afterInvocation(IInvokedMethod arg0, ITestResult arg1) {
-        saveScreenshotPNG(driver);
+        //saveScreenshotPNG(driver);
     }
 
     public void onFinish(ITestContext context) {
@@ -52,7 +54,29 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
     }
 
     public void onTestFailure(ITestResult result) {
-        //saveAttachement(saveScreenshotPNG(driver));
+        Object currentClass = result.getInstance();
+
+        AppiumDriver driver = ((BaseTest) currentClass).getDriver();
+
+        if (driver != null) {
+            saveScreenshotPNG(driver);
+        }
+        /*Class clazz = result.getTestClass().getRealClass();
+        Field field = null;
+
+        try {
+            field = clazz.getDeclaredField("driver");
+        }
+        catch (NoSuchFieldException e) { }
+
+        field.setAccessible(true);
+
+        try {
+            AppiumDriver driver = (AppiumDriver) field.get(result.getInstance());
+        }
+        catch (IllegalAccessException e) { }
+
+        saveAttachement(saveScreenshotPNG(driver));*/
     }
 
     public void onTestSkipped(ITestResult result) {
