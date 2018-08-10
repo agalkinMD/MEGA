@@ -96,7 +96,7 @@ public abstract class BaseTest {
         else return androidDriver;*/
     }
 
-    private void deleteAllureHistory() {
+    /*private void deleteAllureHistory() {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
         File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
         File trendResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history-trend.json");
@@ -114,5 +114,5 @@ public abstract class BaseTest {
     @AfterSuite(alwaysRun = true)
     private void prepareAllureReport() {
         //deleteAllureHistory();
-    }
+    }*/
 }
