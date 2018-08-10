@@ -13,7 +13,7 @@ import java.io.IOException;
 public class AllureAttachmentListener extends BaseTest implements ITestListener, ISuiteListener, IInvokedMethodListener {
 
     public void onStart(ISuite suite) {
-        System.out.println("After executing Suite:" + suite.getName());
+        System.out.println("Before executing Suite:" + suite.getName());
     }
 
     public void onStart(ITestContext context) {
@@ -25,11 +25,10 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
     }
 
     public void afterInvocation(IInvokedMethod arg0, ITestResult arg1) {
-        //saveScreenshotPNG(driver);
     }
 
     public void onFinish(ITestContext context) {
-        System.out.println("Completed executing test:" + context.getName());
+        System.out.println("Complete executing test:" + context.getName());
     }
 
     public void onFinish(ISuite suite) {
@@ -50,7 +49,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
         AppiumDriver driver = ((BaseTest) currentClass).getDriver();
 
         if (driver != null) {
-            saveScreenshotPNG(driver);
+            saveAttachement(makeScreenshot(driver));
         }
         /*Class clazz = result.getTestClass().getRealClass();
         Field field = null;
@@ -65,35 +64,32 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
         try {
             AppiumDriver driver = (AppiumDriver) field.get(result.getInstance());
         }
-        catch (IllegalAccessException e) { }
+        catch (IllegalAccessException e) { }*/
 
-        saveAttachement(saveScreenshotPNG(driver));*/
+        //saveScreenshotPNG(driver);
     }
 
     public void onTestSkipped(ITestResult result) {
-        System.out.println("Test Status::" + result.getName());
+        System.out.println("Test Status:" + result.getName());
     }
 
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 
     }
 
-    @Attachment(value = "{0}", type = "image/png")
-    public byte[] saveScreenshotPNG(AppiumDriver driver) {
-        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+    @Attachment(value = "Screenshot", type = "image/png")
+    public byte[] makeScreenshot(AppiumDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
     }
 
     public void saveAttachement(byte[] byteRepresentation) {
-        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments");
+        File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/ololo.png");
         try {
             FileUtils.writeByteArrayToFile(file, byteRepresentation);
         }
         catch (IOException e) { }
 
-        /*if (driver.getPlatformName().equals("ios"))
-            file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/iOS.png"));
-        else
-            file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/Android.png"));*/
+        //file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/file.png"));
     }
 }

@@ -33,9 +33,6 @@ public abstract class BaseTest {
 
     private AppiumDriver setUp(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
 
-        if (driver != null)
-            return driver;
-
         service = new AppiumServiceBuilder().usingPort(Integer.valueOf(serverPort)).build();
         service.start();
 
@@ -61,6 +58,9 @@ public abstract class BaseTest {
                 capabilities.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, false);
                 capabilities.setCapability(IOSMobileCapabilityType.BUNDLE_ID, "ru.mobiledimension.Mega");
 
+                if (driver != null)
+                    return driver;
+
                 driver = new IOSDriver(service.getUrl(), capabilities);
 
                 driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -73,6 +73,9 @@ public abstract class BaseTest {
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "ru.mobiledimension.mega");
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "ru.mobiledimension.mega.ui.splash.SplashActivity");
                 capabilities.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "ru.mobiledimension.mega.ui.navigation.v2.NavigationActivity");
+
+                if (driver != null)
+                    return driver;
 
                 driver = new AndroidDriver(service.getUrl(), capabilities);
 
@@ -97,7 +100,7 @@ public abstract class BaseTest {
         else return androidDriver;*/
     }
 
-    private void deleteAllureHistory() {
+    /*private void deleteAllureHistory() {
         File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
         File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
         File trendResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history-trend.json");
@@ -111,5 +114,5 @@ public abstract class BaseTest {
     @AfterSuite(alwaysRun = true)
     private void prepareAllureReport() {
         deleteAllureHistory();
-    }
+    }*/
 }
