@@ -101,10 +101,14 @@ public abstract class BaseTest {
         File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
         File trendResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history-trend.json");
         File historyResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history.json");
-        trendReport.delete();
-        historyReport.delete();
-        trendResults.delete();
-        historyResults.delete();
+        if (trendReport.exists())
+            trendReport.delete();
+        if (historyReport.exists())
+            historyReport.delete();
+        if (trendResults.delete())
+            trendResults.delete();
+        if (historyResults.exists())
+            historyResults.delete();
     }
 
     @AfterSuite(alwaysRun = true)
