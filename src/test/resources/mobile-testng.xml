@@ -23,7 +23,6 @@
 
         <classes>
             <class name="ru.mobiledimension.megaapp.tests.profile.SignInScreenTest"/>
-            <class name="ru.mobiledimension.megaapp.tests.profile.SignUpScreenTest"/>
         </classes>
     </test>
 
@@ -46,7 +45,6 @@
 
         <classes>
             <class name="ru.mobiledimension.megaapp.tests.profile.SignInScreenTest"/>
-            <class name="ru.mobiledimension.megaapp.tests.profile.SignUpScreenTest"/>
         </classes>
     </test>
 </suite>
