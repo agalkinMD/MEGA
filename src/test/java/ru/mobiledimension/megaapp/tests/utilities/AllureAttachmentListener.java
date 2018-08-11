@@ -43,7 +43,7 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
 
     public void onFinish(ISuite suite) {
         System.out.println("After executing Suite:" + suite.getName());
-
+        prepareAllureReport();
     }
 
     public void onTestStart(ITestResult result) {

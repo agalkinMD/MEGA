@@ -112,7 +112,7 @@ public abstract class BaseTest {
     }
 
     @AfterSuite(alwaysRun = true)
-    private void prepareAllureReport() {
+    protected void prepareAllureReport() {
         deleteAllureHistory();
     }
 }
