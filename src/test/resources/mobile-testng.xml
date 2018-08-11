@@ -25,4 +25,26 @@
             <class name="ru.mobiledimension.megaapp.tests.profile.SignInScreenTest"/>
         </classes>
     </test>
+
+    <test name="iPhone 6S Plus-Office">
+        <parameter name="deviceName" value="iPhone 6S Plus"/>
+        <parameter name="platform" value="iOS 11.1"/>
+        <parameter name="udid" value="8d4edc432a8e839c9437db9cc597ef82f785b9e3"/>
+        <parameter name="mobilePort" value="8100"/>
+        <parameter name="serverPort" value="4725"/>
+
+        <groups>
+            <define name="all">
+                <include name="check-in"/>
+                <include name="functional"/>
+            </define>
+            <run>
+                <include name="check-in"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="ru.mobiledimension.megaapp.tests.profile.SignInScreenTest"/>
+        </classes>
+    </test>
 </suite>
