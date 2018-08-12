@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 
-public abstract class AllureAttachmentListener extends BaseTest implements ISuiteListener, IInvokedMethodListener {
+public class AllureAttachmentListener extends BaseTest implements ISuiteListener, IInvokedMethodListener {
 
     public void onStart(ISuite suite) {
         System.out.println("Before executing suite: " + suite.getName());
