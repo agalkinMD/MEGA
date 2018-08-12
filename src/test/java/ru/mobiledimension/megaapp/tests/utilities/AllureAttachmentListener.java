@@ -11,23 +11,17 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 
-public class AllureAttachmentListener extends BaseTest implements ITestListener, ISuiteListener, IInvokedMethodListener {
+public abstract class AllureAttachmentListener extends BaseTest implements ISuiteListener, IInvokedMethodListener {
 
     public void onStart(ISuite suite) {
-        System.out.println("Before executing Suite:" + suite.getName());
+        System.out.println("Before executing suite: " + suite.getName());
     }
 
-    public void onStart(ITestContext context) {
-        System.out.println("Begin executing Test:" + context.getName());
-    }
+    public void beforeInvocation(IInvokedMethod invokedMethod, ITestResult result) { }
 
-    public void beforeInvocation(IInvokedMethod arg0, ITestResult arg1) {
-
-    }
-
-    public void afterInvocation(IInvokedMethod arg0, ITestResult arg1) {
-        if (arg0.getTestResult().getStatus() == 2) {
-            Object currentClass = arg1.getInstance();
+    public void afterInvocation(IInvokedMethod invokedMethod, ITestResult result) {
+        if (invokedMethod.getTestResult().getStatus() == 2) {
+            Object currentClass = result.getInstance();
 
             AppiumDriver driver = ((BaseTest) currentClass).getDriver();
 
@@ -37,74 +31,46 @@ public class AllureAttachmentListener extends BaseTest implements ITestListener,
         }
     }
 
-    public void onFinish(ITestContext context) {
-        System.out.println("Complete executing test:" + context.getName());
-    }
-
     public void onFinish(ISuite suite) {
         System.out.println("After executing Suite:" + suite.getName());
-        prepareAllureReport();
-    }
-
-    public void onTestStart(ITestResult result) {
-        System.out.println("Test Status:" + result.getName());
-    }
-
-    public void onTestSuccess(ITestResult result) {
-        System.out.println("Completed executing test:" + result.getName());
-    }
-
-    public void onTestFailure(ITestResult result) {
-        /*Object currentClass = result.getInstance();
-
-        AppiumDriver driver = ((BaseTest) currentClass).getDriver();
-
-        if (driver != null) {
-            saveAttachement(makeScreenshot(driver), driver.getPlatformName());
-        }*/
-        /*Class clazz = result.getTestClass().getRealClass();
-        Field field = null;
-
-        try {
-            field = clazz.getDeclaredField("driver");
-        }
-        catch (NoSuchFieldException e) { }
-
-        field.setAccessible(true);
-
-        try {
-            AppiumDriver driver = (AppiumDriver) field.get(result.getInstance());
-        }
-        catch (IllegalAccessException e) { }*/
-
-        //saveScreenshotPNG(driver);
-    }
-
-    public void onTestSkipped(ITestResult result) {
-        System.out.println("Test Status:" + result.getName());
-    }
-
-    public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-
+        deleteAllureHistoryTrend();
+        addBuildEnvironmentVariables();
     }
 
     @Attachment(value = "Screenshot", type = "image/png")
-    public byte[] makeScreenshot(AppiumDriver driver) {
+    private byte[] makeScreenshot(AppiumDriver driver) {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-
     }
 
-    public void saveAttachement(byte[] byteRepresentation, String platformName) {
+    private void saveAttachement(byte[] byteRepresentation, String platformName) {
         File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/" + platformName
                 + "_" + new Timestamp(System.currentTimeMillis()) + ".png");
-
-        //File file = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/ololo.png");
 
         try {
             FileUtils.writeByteArrayToFile(file, byteRepresentation);
         }
         catch (IOException e) { }
+    }
 
-        //file.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/data/attachments/file.png"));
+    private void deleteAllureHistoryTrend() {
+        File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
+        File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
+        File trendResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history-trend.json");
+        File historyResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history.json");
+        if (trendReport.exists())
+            trendReport.delete();
+        if (historyReport.exists())
+            historyReport.delete();
+        if (trendResults.delete())
+            trendResults.delete();
+        if (historyResults.exists())
+            historyResults.delete();
+    }
+
+    private void addBuildEnvironmentVariables() {
+        File environment = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/src/test/resources/environment.properties");
+        File allureResultsDir = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results");
+        if (allureResultsDir.exists() && allureResultsDir.isDirectory())
+            environment.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f"));
     }
 }

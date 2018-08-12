@@ -47,7 +47,7 @@ public class SignUpScreenTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     @Story("Пользователь собирается зарегистрироваться, вводя корректные данные регистрации")
     public void isEnabledSignUpButton() {
-        signUpScreen.setUserData("", "agalkin@mobiledimension.ru", "Qazxswdf12");
+        signUpScreen.setUserData("Anton", "agalkin@mobiledimension.ru", "Qazxswdf12");
         signUpScreen.hideKeyBoard();
         signUpScreen.setPersonalDataProccessingSwitch();
         Assert.assertTrue(signUpScreen.isEnabledSignUpButton());

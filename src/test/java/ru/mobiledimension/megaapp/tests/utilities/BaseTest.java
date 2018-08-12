@@ -9,26 +9,14 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Attachment;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterSuite;
-import ru.mobiledimension.megaapp.screens.profile.SignInScreen;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
     AppiumDriver driver;
-    //static AppiumDriver iOSDriver;
-    //static AppiumDriver androidDriver;
-
     AppiumDriverLocalService service;
 
     private AppiumDriver setUp(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
@@ -87,32 +75,10 @@ public abstract class BaseTest {
     protected AppiumDriver getDriver() {
         return driver;
     }
+
     protected AppiumDriver setDriver(String deviceName, String platform, String udid, String mobilePort, String serverPort) {
         if (driver == null)
             return setUp(deviceName, platform, udid, mobilePort, serverPort);
         return driver;
-        /*else if (driver.getPlatformName().equals("ios"))
-            return iOSDriver;
-        else return androidDriver;*/
-    }
-
-    private void deleteAllureHistory() {
-        File trendReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history-trend.json");
-        File historyReport = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-report/history/history.json");
-        File trendResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history-trend.json");
-        File historyResults = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results/history/history.json");
-        if (trendReport.exists())
-            trendReport.delete();
-        if (historyReport.exists())
-            historyReport.delete();
-        if (trendResults.delete())
-            trendResults.delete();
-        if (historyResults.exists())
-            historyResults.delete();
-    }
-
-    @AfterSuite(alwaysRun = true)
-    protected void prepareAllureReport() {
-        deleteAllureHistory();
     }
 }
