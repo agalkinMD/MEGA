@@ -71,6 +71,6 @@ public class AllureAttachmentListener extends BaseTest implements ISuiteListener
         File environment = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/src/test/resources/environment.properties");
         File allureResultsDir = new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results");
         if (allureResultsDir.exists() && allureResultsDir.isDirectory())
-            environment.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f"));
+            environment.renameTo(new File("/Users/anton/Development/TeamCity/buildAgent/work/fc4047a659d7949f/allure-results"));
     }
 }
