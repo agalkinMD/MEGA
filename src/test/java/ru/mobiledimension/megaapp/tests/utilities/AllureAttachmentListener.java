@@ -20,7 +20,7 @@ public class AllureAttachmentListener extends BaseTest implements ISuiteListener
     public void beforeInvocation(IInvokedMethod invokedMethod, ITestResult result) { }
 
     public void afterInvocation(IInvokedMethod invokedMethod, ITestResult result) {
-        if (invokedMethod.getTestResult().getStatus() == 2) {
+        if (invokedMethod.getTestResult().getStatus() == ITestResult.FAILURE) {
             Object currentClass = result.getInstance();
 
             AppiumDriver driver = ((BaseTest) currentClass).getDriver();
