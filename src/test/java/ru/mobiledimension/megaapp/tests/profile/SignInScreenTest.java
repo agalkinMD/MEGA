@@ -55,7 +55,7 @@ public class SignInScreenTest extends BaseTest {
     @Story("Пользователь собирается авторизоваться, вводя корректные данные авторизации")
     @Severity(SeverityLevel.BLOCKER)
     public void isEnabledSignInButton() {
-        signInScreen.setUserData("agalkin@mobiledimension.ru", "Qazxswdf12");
+        signInScreen.setUserData("", "Qazxswdf12");
         signInScreen.hideKeyBoard();
         Assert.assertTrue(signInScreen.isEnabledSignInButton());
     }
